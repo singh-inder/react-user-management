@@ -1,4 +1,8 @@
+![](https://supabase.com/docs/img/user-management-demo.png)
+
 # Supabase Vite User Management
+
+⭐ This example is sourced from [supabase/react-user-management](https://github.com/supabase/supabase/tree/master/examples/user-management/react-user-management).
 
 This example will set you up for a very common situation: users can sign up with a magic link and then update their account with public profile information, including a profile image.
 
@@ -9,44 +13,37 @@ This demonstrates how to use:
 - Public profiles restricted with [Policies](https://supabase.com/docs/guides/auth#policies).
 - Frontend using [Vite](https://vitejs.dev/).
 
-## Technologies used
-
-- Frontend:
-  - [Vite](https://vitejs.dev/) - a React toolchain.
-  - [Supabase.js](https://supabase.com/docs/library/getting-started) for user management and realtime data syncing.
-- Backend:
-  - [supabase.com/dashboard](https://supabase.com/dashboard/): hosted Postgres database with restful API for usage with Supabase.js.
-
 ## Build from scratch
 
-### 1. Create new project
+### 1. Set up a Supabase self-hosted instance:
 
-Sign up to Supabase - [https://supabase.com/dashboard](https://supabase.com/dashboard) and create a new project. Wait for your database to start.
+You can use [supabase-automated-self-host](https://github.com/singh-inder/supabase-automated-self-host) to quickly set one up or use your own preferred way.
 
 ### 2. Run "User Management" Quickstart
 
-Once your database has started, head over to your project's `SQL Editor` and run the "User Management Starter" quickstart. On the `SQL editor` page, scroll down until you see `User Management Starter: Sets up a public Profiles table which you can access with your API`. Click that, then click `RUN` to execute that query and create a new `profiles` table. When that's finished, head over to the `Table Editor` and see your new `profiles` table.
+Once your instance has started, head over to your project's `SQL Editor` and run the "User Management Starter" quickstart. On the `SQL editor` page, scroll down until you see `User Management Starter: Sets up a public Profiles table which you can access with your API`. Click that, then click `RUN` to execute that query and create a new `profiles` table. When that's finished, head over to the `Table Editor` and see your new `profiles` table.
 
 ### 3. Get the URL and Key
 
-Go to the Project Settings (the cog icon), open the API tab, and find your API URL and `anon` key, you'll need these in the next step.
+- URL will be the domain at which you've deployed your supabase.
+
+- Get your ANON_KEY. If you've deployed self-hosted supabase instance using [supabase-automated-self-host](https://github.com/singh-inder/supabase-automated-self-host), then the ANON_KEY is present inside `supabase-automated-self-host/docker/.env` file. You can simply run the following cmd to filter the ANON_KEY:
+  ```bash
+  cat .env | grep ANON_KEY
+  ```
 
 The `anon` key is your client-side API key. It allows "anonymous access" to your database, until the user has logged in. Once they have logged in, the keys will switch to the user's own login token. This enables row level security for your data. Read more about this [below](#postgres-row-level-security).
-
-![image](https://user-images.githubusercontent.com/10214025/88916245-528c2680-d298-11ea-8a71-708f93e1ce4f.png)
 
 **_NOTE_**: The `service_role` key has full access to your data, bypassing any security policies. These keys have to be kept secret and are meant to be used in server environments and never on a client or browser.
 
 ### 4. Env vars
 
-Create a file in this folder `.env.local`
+Create a copy of `.env.example`, name it `.env.local` and populate this file with your URL and Key.
 
 ```
 VITE_SUPABASE_URL=
 VITE_SUPABASE_ANON_KEY=
 ```
-
-Populate this file with your URL and Key.
 
 ### 5. Run the application
 
@@ -126,4 +123,4 @@ with
 
 - [Supabase](https://supabase.com)
 
-Supabase is open source. We'd love for you to follow along and get involved at https://github.com/supabase/supabase
+Supabase is open source https://github.com/supabase/supabase
